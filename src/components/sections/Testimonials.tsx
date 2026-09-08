@@ -15,6 +15,7 @@ export function Testimonials() {
           title="Quem estudou na Unex, recomenda"
           description="Histórias reais de estudantes que construíram carreira a partir da formação recebida aqui."
           align="center"
+          tone="dark"
         />
 
         <div className="grid gap-6 lg:grid-cols-3">
