@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+
+/*
+ * Tema visual do site institucional da Unex (Tailwind CSS v4, config via
+ * `@theme`). A paleta reinterpreta a identidade observada nas referências em
+ * `references/` (azul-marinho do header/sidebar e magenta de destaque do
+ * sistema acadêmico), aplicada aqui a um layout público claro e moderno.
+ */
+@theme {
+  --font-display: 'Poppins', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --color-navy-950: #070a24;
+  --color-navy-900: #0b0f34;
+  --color-navy-800: #12163f;
+  --color-navy-700: #1b2054;
+  --color-navy-600: #262c6b;
+
+  --color-magenta-50: #fdf2f8;
+  --color-magenta-100: #fce7f3;
+  --color-magenta-400: #ec4a97;
+  --color-magenta-500: #e01571;
+  --color-magenta-600: #b80f5c;
+  --color-magenta-700: #920c4a;
+
+  --color-azure-50: #eef6ff;
+  --color-azure-400: #4f94f0;
+  --color-azure-500: #2f74e0;
+  --color-azure-600: #1f5cc0;
+
+  --animate-fade-up: fade-up 0.6s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white font-sans text-slate-700 antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply font-display text-navy-900;
+}
+
+/* Respeita usuários que preferem menos movimento na tela. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
