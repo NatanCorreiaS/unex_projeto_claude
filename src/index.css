@@ -50,11 +50,13 @@ body {
   @apply bg-white font-sans text-slate-700 antialiased;
 }
 
-h1,
-h2,
-h3,
-h4 {
-  @apply font-display text-navy-900;
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-navy-900;
+  }
 }
 
 /* Respeita usuários que preferem menos movimento na tela. */
