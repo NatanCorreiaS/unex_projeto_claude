@@ -22,7 +22,9 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # jsdom exige Node ^22.22.2 || ^24.15.0 || >=26.0.0 (o undici que ele
+          # embute usa uma API interna de webidl ausente em versões mais antigas).
+          node-version: 24
           cache: npm
 
       - run: npm ci
