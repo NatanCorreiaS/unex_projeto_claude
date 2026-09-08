@@ -46,7 +46,7 @@ export function Hero() {
 
           <h1 className="text-4xl leading-[1.08] font-semibold text-white sm:text-5xl lg:text-6xl">
             Construa o futuro que você imagina na{' '}
-            <span className="text-magenta-400">Unex</span>
+            <span className="text-magenta-100">Unex</span>
           </h1>
 
           <p className="max-w-xl text-lg text-slate-300">
