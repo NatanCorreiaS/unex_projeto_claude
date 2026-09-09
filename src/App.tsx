@@ -1,3 +1,4 @@
+import { Chatbot } from './components/chatbot/Chatbot'
 import { Footer } from './components/layout/Footer'
 import { Navbar } from './components/layout/Navbar'
 import { About } from './components/sections/About'
@@ -25,6 +26,7 @@ function App() {
         <ContactForm />
       </main>
       <Footer />
+      <Chatbot />
     </>
   )
 }

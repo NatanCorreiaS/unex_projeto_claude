@@ -58,3 +58,21 @@ export interface ContactFormValues {
   course: string
   message: string
 }
+
+// ---------------------------------------------------------------------------
+// Chatbot — tipos compartilhados entre serviço Gemini, hook e componente UI.
+// ---------------------------------------------------------------------------
+
+/** Papel de cada mensagem no histórico do chat. */
+export type ChatRole = 'user' | 'model'
+
+/** Mensagem individual do chat com metadados mínimos para persistência. */
+export interface ChatMessage {
+  id: string
+  role: ChatRole
+  text: string
+  timestamp: number
+}
+
+/** Status do fluxo de envio de mensagem do chatbot. */
+export type ChatStatus = 'idle' | 'loading' | 'error'

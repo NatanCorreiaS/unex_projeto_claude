@@ -34,10 +34,18 @@ correspondente ao lado.
 
 ```bash
 npm install
-npm run dev       # servidor de desenvolvimento
-npm run test      # roda a suíte de testes uma vez
+# Front + back separados (recomendado em dev)
+npm run dev              # Vite (http://localhost:5173) com proxy /api -> 3001
+npm run dev:server       # Express + Gemini (http://localhost:3001)
+npm run dev:all          # ambos juntos (concurrently)
+
+# Produção local — Express serve o build do Vite
+npm run build:all        # build front (dist/) + back (server/dist/)
+npm run start            # ou npm run serve — Express em :3001 servindo dist/
+# Variáveis: GEMINI_API_KEY (obrigatória no servidor) em .env ou env; PORT opcional
+
+npm run test             # roda a suíte de testes uma vez
 npm run test:watch
-npm run build      # build de produção em dist/
 npm run lint
 ```
 
