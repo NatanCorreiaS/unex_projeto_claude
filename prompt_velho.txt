@@ -1,0 +1,30 @@
+### para prof, nós usamos um arquivo AGENTS.md/CLAUDE.md, então boa parte do prompt também tem esse AGENTS.md/CLAUDE.md
+
+Você foi encarregado de implementar um sistema de chatbot para o site institucional da UNEX usando a arquitetura React + TypeScript + Tailwind CSS + Vite.
+
+O trabalho envolve:
+
+
+1. Criar um backend em Express (Node.js) que funciona como intermediário para a API do Gemini
+2. Implementar streaming de respostas usando Gemini 3.5 Flash Lite
+3. Criar um componente React chamado Chatbot que gerencia a interface de usuário
+4. Implementar um hook personalizado (useChatbot) para gerenciar a lógica de estado do chatbot
+5. Criar utilitários para armazenar o histórico de conversas (chatStorage)
+6. Adicionar tipos TypeScript para padronizar dados do chatbot
+7. Escrever testes para todas as funcionalidades (server, componentes, hooks e utilitários)
+
+A estrutura criada deve:
+- Receber mensagens do usuário através da interface
+- Enviar essas mensagens para o backend Express
+- O backend fará requisições à API do Gemini e fará streaming das respostas
+- As respostas devem aparecer em tempo real (streaming) na interface
+- Manter o histórico de conversas armazenado localmente
+- Seguir as melhores práticas de TypeScript e React
+
+O projeto segue as diretivas de:
+- Testar todas as funções após escrever
+- Seguir melhores práticas TypeScript
+- Deixar testes em arquivos mirror com sufixo test
+- Comentar funcionalidades
+- Foco em segurança de dados
+- Arquitetura para GitHub Pages

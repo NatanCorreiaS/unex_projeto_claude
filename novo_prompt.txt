@@ -1,0 +1,175 @@
+# COMPARAÇÃO: PROMPT ORIGINAL vs PROMPT REVISADO COM PROMPT ENGINEERING
+Baseado no commit: feat: chatbot streaming gemini-3.5-flash-lite + express backend
+
+---
+
+## SEÇÃO 1: PROMPT ORIGINAL (SEM TÉCNICAS DE PROMPT ENGINEERING)
+
+### Versão Original - prompt_velho.txt
+
+Você foi encarregado de implementar um sistema de chatbot para o site institucional da UNEX usando a arquitetura React + TypeScript + Tailwind CSS + Vite.
+
+O trabalho envolveu:
+
+1. Criar um backend em Express (Node.js) que funciona como intermediário para a API do Gemini
+2. Implementar streaming de respostas usando Gemini 3.5 Flash Lite
+3. Criar um componente React chamado Chatbot que gerencia a interface de usuário
+4. Implementar um hook personalizado (useChatbot) para gerenciar a lógica de estado do chatbot
+5. Criar utilitários para armazenar o histórico de conversas (chatStorage)
+6. Adicionar tipos TypeScript para padronizar dados do chatbot
+7. Escrever testes para todas as funcionalidades (server, componentes, hooks e utilitários)
+
+A estrutura criada deve:
+- Receber mensagens do usuário através da interface
+- Enviar essas mensagens para o backend Express
+- O backend fará requisições à API do Gemini e fará streaming das respostas
+- As respostas devem aparecer em tempo real (streaming) na interface
+- Manter o histórico de conversas armazenado localmente
+- Seguir as melhores práticas de TypeScript e React
+
+Arquivo importantes modificados:
+- server/index.ts - Configuração do servidor Express
+- server/gemini.ts - Integração com API Gemini
+- src/components/chatbot/Chatbot.tsx - Componente principal da UI
+- src/hooks/useChatbot.ts - Lógica de estado
+- src/utils/chatStorage.ts - Persistência de dados
+- src/types/index.ts - Definições de tipos
+
+O projeto segue as diretivas de:
+- Testar todas as funções após escrever
+- Seguir melhores práticas TypeScript
+- Deixar testes em arquivos mirror com sufixo test
+- Comentar funcionalidades
+- Foco em segurança de dados
+- Arquitetura para GitHub Pages
+
+---
+
+## SEÇÃO 2: PROMPT REVISADO (COM CHAIN OF THOUGHT)
+
+### Técnica Aplicada: CHAIN OF THOUGHT (CoT)
+**O que é:** Técnica que pede ao modelo para "pensar passo a passo" antes de executar, explicitando o raciocínio lógico.
+**Onde foi aplicado:** Em toda a estrutura do prompt, quebrando o problema em etapas sequenciais.
+
+### Versão Revisada - novo_prompt.txt
+
+Você precisa implementar um sistema completo de chatbot para o site da UNEX.
+
+[TÉCNICA CoT - INTRODUÇÃO]
+Pense passo a passo através de cada componente:
+
+[TÉCNICA CoT - PASSO 1: Visualizar o fluxo completo antes de codificar]
+PASSO 1: COMPREENDER O FLUXO DE DADOS
+- O usuário digita uma mensagem na interface do React
+- Essa mensagem deve ser enviada para o servidor Express
+- O servidor Express encaminha para a API Gemini
+- A API Gemini responde em streaming
+- A resposta em streaming volta para o frontend
+- O frontend renderiza a mensagem conforme ela chega
+
+[TÉCNICA CoT - PASSO 2: Raciocinar sobre responsabilidades]
+PASSO 2: IMPLEMENTAR O BACKEND EXPRESS
+Pense: Qual é a responsabilidade do servidor?
+- Receber requisições POST com mensagens do usuário
+- Fazer autenticação com a API Gemini usando credenciais seguras
+- Implementar streaming da resposta (não esperar resposta completa)
+- Retornar dados em tempo real para o frontend
+Qual arquivo você precisa criar? (server/index.ts e server/gemini.ts)
+
+[TÉCNICA CoT - PASSO 3: Decompor integração com terceiro]
+PASSO 3: IMPLEMENTAR A INTEGRAÇÃO COM GEMINI
+Pense: Como conectar com a API Gemini?
+- Configurar cliente Gemini com modelo 3.5-flash-lite
+- Criar função que recebe mensagem e retorna stream
+- Tratar erros de conectividade
+- Manter histórico de contexto se necessário
+Qual função deve fazer isso? (server/gemini.ts)
+
+[TÉCNICA CoT - PASSO 4: Pensar sobre gerenciamento de estado]
+PASSO 4: GERENCIAR ESTADO NO FRONTEND
+Pense: Como o React vai gerenciar as mensagens?
+- Criar hook personalizado (useChatbot) para lógica de estado
+- Estado deve conter: mensagens anteriores, mensagem atual, status de carregamento
+- Hook deve ter funções para: enviar mensagem, receber resposta, limpar chat
+Qual é a estrutura de dados de uma mensagem? (types/index.ts)
+
+[TÉCNICA CoT - PASSO 5: Raciocinar sobre UI/UX]
+PASSO 5: IMPLEMENTAR COMPONENTE VISUAL
+Pense: Como o usuário interage com o chatbot?
+- Componente Chatbot.tsx que usa o hook useChatbot
+- Input para usuário digitar
+- Area de exibição de mensagens com scroll automático
+- Indicador visual de mensagens sendo processadas
+- Suporte a tema dark/light do Tailwind
+
+[TÉCNICA CoT - PASSO 6: Pensar sobre persistência]
+PASSO 6: PERSISTIR DADOS LOCALMENTE
+Pense: Como manter histórico entre sessões?
+- Criar utilitário chatStorage.ts
+- Salvar em localStorage após cada mensagem
+- Carregar histórico ao abrir a página
+- Limpar dados de forma segura
+
+[TÉCNICA CoT - PASSO 7: Validação através de testes]
+PASSO 7: TESTAR TUDO
+Pense: Como garantir que funciona?
+- Criar testes para cada camada: server/gemini.test.ts
+- Testes para hook: src/hooks/useChatbot.test.ts
+- Testes para componente: src/components/chatbot/Chatbot.test.tsx
+- Testes para utils: src/utils/chatStorage.test.ts
+
+[TÉCNICA CoT - SÍNTESE FINAL]
+Agora, com essa compreensão passo a passo, implemente cada componente seguindo:
+- Melhores práticas TypeScript
+- Testes para cada função
+- Comentários explicativos
+- Segurança de dados
+- Compatibilidade com GitHub Pages
+
+---
+
+## SEÇÃO 3: PRINCIPAIS MUDANÇAS REALIZADAS
+
+| Aspecto | Prompt Original | Prompt com CoT | Motivo |
+|---------|-----------------|----------------|--------|
+| **Estrutura** | Lista direta de tarefas | Sequência de "passos a pensar" | Força raciocínio lógico antes da execução |
+| **Contexto** | Apresenta apenas O QUÊ | Inclui POR QUÊ e COMO pensar | Melhora compreensão do problema |
+| **Perguntas** | Implícitas | Explícitas em cada etapa (e.g., "Qual é a responsabilidade?") | Engaja o modelo no raciocínio ativo |
+| **Fluxo** | Independente por componente | Integrado e sequencial | Evita solução de problemas isolados |
+| **Profundidade** | Superficial | Profunda em cada camada | Reduz erros de design |
+| **Validação** | Mencionada apenas | Explicada como garantia | Enfatiza importância de testes |
+
+---
+
+## SEÇÃO 4: CONCLUSÃO - AVALIAÇÃO DA TÉCNICA
+
+### Técnica Utilizada: Chain of Thought (CoT)
+
+**Por que essa técnica trouxe ganho de qualidade:**
+
+1. **Pensamento Estruturado**: Ao invés de listar tarefas, o CoT força o modelo a raciocinar logicamente sobre cada componente ANTES de implementar. Isso reduz erros arquiteturais.
+
+2. **Interdependências Claras**: O prompt original tratava componentes como isolados. Com CoT, fica explícito que o estado frontend depende do streaming do backend, que depende da integração Gemini.
+
+3. **Contexto Preservado**: Cada passo mantém referência aos passos anteriores. Quando chega no PASSO 5 (componente visual), o modelo já entendeu o fluxo completo (PASSO 1).
+
+4. **Menos Ambiguidade**: Perguntas explícitas ("Qual é a responsabilidade do servidor?") guiam o modelo para respostas mais precisas e menos genéricas.
+
+5. **Segurança de Dados Reforçada**: No PASSO 3 e PASSO 6, a técnica força reflexão sobre autenticação e limpeza de dados, dois pontos críticos do projeto.
+
+**Resultado esperado com CoT vs Original**:
+- Respostas mais detalhadas e pensadas
+- Menos necessidade de iterações/correções
+- Código mais seguro e bem arquitetado
+- Testes mais abrangentes
+
+---
+
+## SEÇÃO 5: METADADOS
+
+**Commit**: 0260cfa - feat: chatbot streaming gemini-3.5-flash-lite + express backend
+**Técnica Primária**: Chain of Thought (CoT)
+**Data de Análise**: 2026-09-15
+**Arquivos Criados**:
+- prompt_velho.txt (original)
+- novo_prompt.txt (revisado)
